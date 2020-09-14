@@ -29,8 +29,7 @@ def retorna_dados_estacao():
     #print('Pressao Atmosferica em Eduardo Gomes: {}'.format(dados_estacao2['qnh']))
     #arquivo = open('/EMS/scripts/inmet/arquivos/{}_{}{}{}_{}.txt'.format(localidade, ano, mes, dia, hora), 'w')
     arquivo = open('/tmp/{}_{}{}{}_{}.txt'.format(localidade, ano, mes, dia, hora), 'w')
-    #arquivo.write('SBEG' 'ano' 'mes' 'dia' 'hora' '////' '////' 'temperatura' 'ur' 'vnt_dir' 'vnt_vel' 'vnt_dir' 'qnh')
-    arquivo.write('SBEG {} {} {} {} //// //// {} //// //// {} //// //// //// //// //// {} //// //// {} {} //// //// //// //// //// //// //// ='.
+    arquivo.write('SBEG {} {} {} {} //// //// {} //// //// {} //// //// //// //// //// {} //// //// {} {} //// //// //// //// //// //// ='.
                   format(ano, mes, dia, hora, dados_estacao['temperatura'], dados_estacao['ur'], dados_estacao2['qnh'],
                          dados_estacao2['vnt_vel'], dados_estacao2['vnt_dir']))
     arquivo.close()
