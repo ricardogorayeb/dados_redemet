@@ -4,7 +4,7 @@ import datetime
 
 def retorna_dados_estacao():
     #data_hora()
-    dt = datetime.datetime.now()
+    dt = datetime.datetime.utcnow()
     hora = dt.hour
     minuto = dt.minute
     dia = dt.day
@@ -21,12 +21,18 @@ def retorna_dados_estacao():
     dados_estacao2 = response2.json()
     dados_estacao2 = dados_estacao2['data']
     #print(type(dados_estacao))
-    print('Temperatura em Eduardo Gomes: {}'.format(dados_estacao['temperatura']))
-    print('Umidade Relativa em Eduardo Gomes: {}'.format(dados_estacao['ur']))
-    print('Direcao do Vento em Eduardo Gomes: {}'.format(dados_estacao2['vnt_dir']))
-    print('Velocidade do Vento em Eduardo Gomes: {}'.format(dados_estacao2['vnt_vel']))
-    print('Direcao do Vento em Eduardo Gomes: {}'.format(dados_estacao2['vnt_dir']))
-    print('Pressao Atmosferica em Eduardo Gomes: {}'.format(dados_estacao2['qnh']))
+    #print('Temperatura em Eduardo Gomes: {}'.format(dados_estacao['temperatura']))
+    #print('Umidade Relativa em Eduardo Gomes: {}'.format(dados_estacao['ur']))
+    #print('Direcao do Vento em Eduardo Gomes: {}'.format(dados_estacao2['vnt_dir']))
+    #print('Velocidade do Vento em Eduardo Gomes: {}'.format(dados_estacao2['vnt_vel']))
+    #print('Direcao do Vento em Eduardo Gomes: {}'.format(dados_estacao2['vnt_dir']))
+    #print('Pressao Atmosferica em Eduardo Gomes: {}'.format(dados_estacao2['qnh']))
+    arquivo = open('/tmp/{}_{}{}{}_{}.txt'.format(localidade, ano, mes, dia, hora), 'w')
+    #arquivo.write('SBEG' 'ano' 'mes' 'dia' 'hora' '////' '////' 'temperatura' 'ur' 'vnt_dir' 'vnt_vel' 'vnt_dir' 'qnh')
+    arquivo.write('SBEG {} {} {} {} //// //// {} //// //// {} //// //// //// //// //// {} //// //// {} {} //// //// //// //// //// //// //// ='.
+                  format(ano, mes, dia, hora, dados_estacao['temperatura'], dados_estacao['ur'], dados_estacao2['qnh'],
+                         dados_estacao2['vnt_vel'], dados_estacao2['vnt_dir']))
+    arquivo.close()
     #return(dados_estacao)
 
 if __name__ == '__main__':
