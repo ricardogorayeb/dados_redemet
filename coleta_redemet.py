@@ -21,6 +21,9 @@ def retorna_dados_estacao():
     dados_estacao2 = dados_estacao2['data']
     #print(type(dados_estacao))
     #print('Temperatura em Eduardo Gomes: {}'.format(dados_estacao['temperatura']))
+    #metar = dados_estacao['metar']
+    #metar_list = metar.split(' ')
+    #print(metar_list)
     temperatura = dados_estacao['temperatura']
     ur = dados_estacao['ur']
     vnt_dir = dados_estacao2['vnt_dir']
