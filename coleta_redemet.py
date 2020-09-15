@@ -3,8 +3,6 @@ import datetime
 import string
 
 def retorna_dados_estacao():
-    #data_hora()
-    sp_chars = ['ºC']
     dt = datetime.datetime.utcnow()
     hora = dt.hour
     minuto = dt.minute
