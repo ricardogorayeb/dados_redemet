@@ -46,9 +46,6 @@ def retorna_dados_estacao():
                   format(ano, mes, dia, hora, temperatura, ur, qnh[0],
                          vnt_vel[0], vnt_dir[0]))
     arquivo.close()
-    #subprocess.call(["sed -i 's/ºC/''/g' /tmp/SBEG_20200915_15.txt"], shell=True)
-    #subprocess.call(["sed -i 's/\'[/''/g'"], shell=True)
-    #return(dados_estacao)
 
 if __name__ == '__main__':
     retorna_dados_estacao()
