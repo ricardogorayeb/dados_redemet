@@ -1,9 +1,10 @@
 import requests
 import datetime
-
+import string
 
 def retorna_dados_estacao():
     #data_hora()
+    sp_chars = ['ºC']
     dt = datetime.datetime.utcnow()
     hora = dt.hour
     minuto = dt.minute
@@ -22,6 +23,20 @@ def retorna_dados_estacao():
     dados_estacao2 = dados_estacao2['data']
     #print(type(dados_estacao))
     #print('Temperatura em Eduardo Gomes: {}'.format(dados_estacao['temperatura']))
+    temperatura = dados_estacao['temperatura']
+    ur = dados_estacao['ur']
+    vnt_dir = dados_estacao2['vnt_dir']
+    vnt_vel = dados_estacao2['vnt_vel']
+    qnh = dados_estacao2['qnh']
+    punc = '''!()-[]{};:'"\, <>.?@[]#ºC$%^&*_~'''
+    for ele in temperatura:
+        if ele in punc:
+            temperatura = temperatura.replace(ele,"")
+
+    for ele in ur:
+        if ele in punc:
+            ur = ur.replace(ele,"")
+
     #print('Umidade Relativa em Eduardo Gomes: {}'.format(dados_estacao['ur']))
     #print('Direcao do Vento em Eduardo Gomes: {}'.format(dados_estacao2['vnt_dir']))
     #print('Velocidade do Vento em Eduardo Gomes: {}'.format(dados_estacao2['vnt_vel']))
@@ -29,11 +44,14 @@ def retorna_dados_estacao():
     #print('Pressao Atmosferica em Eduardo Gomes: {}'.format(dados_estacao2['qnh']))
     #arquivo = open('/EMS/scripts/inmet/arquivos/{}_{}{}{}_{}.txt'.format(localidade, ano, mes, dia, hora), 'w')
     arquivo = open('/tmp/{}_{}{}{}_{}.txt'.format(localidade, ano, mes, dia, hora), 'w')
-    arquivo.write('SBEG {} {} {} {} //// //// {} //// //// {} //// //// //// //// //// {} //// //// {} {} //// //// //// //// //// //// //// ='.
-                  format(ano, mes, dia, hora, dados_estacao['temperatura'], dados_estacao['ur'], dados_estacao2['qnh'],
-                         dados_estacao2['vnt_vel'], dados_estacao2['vnt_dir']))
+    arquivo.write('SBEG {} {} {} {} //// //// {} //// //// {} //// //// //// //// //// {} //// //// {} {} //// //// //// / //// //// //// ='.
+                  format(ano, mes, dia, hora, temperatura, ur, qnh[0],
+                         vnt_vel[0], vnt_dir[0]))
     arquivo.close()
+    #subprocess.call(["sed -i 's/ºC/''/g' /tmp/SBEG_20200915_15.txt"], shell=True)
+    #subprocess.call(["sed -i 's/\'[/''/g'"], shell=True)
     #return(dados_estacao)
 
 if __name__ == '__main__':
     retorna_dados_estacao()
+
